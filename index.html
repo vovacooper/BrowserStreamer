@@ -31,10 +31,11 @@
     }
 
     function Server(){
+        document.title = "Server";
         var randId = Math.floor((Math.random() * 10000000000000) + 1);
 
         var img = document.getElementById("gameQRCode");
-        img.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + randId;
+        img.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + document.URL + "?serverid="+ randId;
 
         var gameId = "PS" + randId;
         console.log(gameId);
@@ -48,6 +49,7 @@
         });
     }
     function Client(){
+        document.title = "Client";
         var peer = new Peer('client1', {key: 'pyvnsf5mod23mcxr'}); 
 
         var conn = peer.connect('PS5304950941355');
