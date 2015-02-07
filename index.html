@@ -9,6 +9,9 @@
 <body>
     <canvas id="myCanvas" width="578" height="200"></canvas>
     <img id="gameQRCode" src="">
+    <p id="accelData">Data from accelerometer!</p>
+    <p id="mouseData">Data from mouse!</p>
+
     <script>
     var params = {};
     if (location.search) {
@@ -66,7 +69,8 @@
             var accelerationX = event.accelerationIncludingGravity.x;  
             var accelerationY = event.accelerationIncludingGravity.y;  
             var accelerationZ = event.accelerationIncludingGravity.z;  
-            console.log(accelerationX+","+accelerationY+","+accelerationZ);
+            
+            document.getElementById("accelData").innerHTML = accelerationX+","+accelerationY+","+accelerationZ;
         }  
         
         //Mouse
@@ -83,7 +87,7 @@
         canvas.addEventListener('mousemove', function(evt) {
             var mousePos = getMousePos(canvas, evt);
             var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-            console.log(message);
+            document.getElementById("accelData").innerHTML = message;
             conn.send(message);
         }, false);
     }
