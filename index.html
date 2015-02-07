@@ -69,8 +69,9 @@
             var accelerationX = event.accelerationIncludingGravity.x;  
             var accelerationY = event.accelerationIncludingGravity.y;  
             var accelerationZ = event.accelerationIncludingGravity.z;  
-            
-            document.getElementById("accelData").innerHTML = accelerationX+","+accelerationY+","+accelerationZ;
+            var message = 'Mouse position: ' + accelerationX+","+accelerationY+","+accelerationZ;
+            document.getElementById("accelData").innerHTML = message;
+            conn.send(message);
         }  
         
         //Mouse
