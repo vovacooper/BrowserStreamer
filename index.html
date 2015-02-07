@@ -45,7 +45,12 @@
         //Debug
         peer.on('connection', function(conn) {
             conn.on('data', function(data){
-                console.log(data);
+                if(data.type == "accel"){
+                    document.getElementById("accelData").innerHTML = "accel: " + data.x + "," + data.y + "," + data.z;
+                }else if(data.type == "mouse"){
+                    document.getElementById("mouseData").innerHTML = "mouse: " + data.x + "," + data.y;
+                } 
+                //console.log(data);
             });
         });
     }
@@ -69,9 +74,15 @@
             var accelerationX = event.accelerationIncludingGravity.x;  
             var accelerationY = event.accelerationIncludingGravity.y;  
             var accelerationZ = event.accelerationIncludingGravity.z;  
-            var message = 'Mouse position: ' + accelerationX+","+accelerationY+","+accelerationZ;
-            document.getElementById("accelData").innerHTML = message;
-            conn.send(message);
+            var data = {
+                type:"accel",
+                x:accelerationX,
+                y:accelerationY,
+                z:accelerationZ
+            }
+            
+            document.getElementById("accelData").innerHTML = "accel: " + data.x + "," + data.y + "," + data.z;
+            conn.send(data);
         }  
         
         //Mouse
@@ -87,9 +98,13 @@
 
         canvas.addEventListener('mousemove', function(evt) {
             var mousePos = getMousePos(canvas, evt);
-            var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-            document.getElementById("accelData").innerHTML = message;
-            conn.send(message);
+            var data = {
+                type:"mouse",
+                x:mousePos.x,
+                y:mousePos.y
+            }
+            document.getElementById("mouseData").innerHTML = "mouse: " + data.x + "," + data.y;
+            conn.send(data);
         }, false);
     }
     </script>
