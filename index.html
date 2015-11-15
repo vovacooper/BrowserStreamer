@@ -48,8 +48,10 @@
             conn.on('data', function(data){
                 if(data.type == "accel"){
                     document.getElementById("accelData").innerHTML = "accel: " + data.x + "," + data.y + "," + data.z;
+                    //SendMessage ('MyGameObject', 'MyFunction', 'foobar');
                 }else if(data.type == "mouse"){
                     document.getElementById("mouseData").innerHTML = "mouse: " + data.x + "," + data.y;
+                    //SendMessage ('MyGameObject', 'MyFunction', 'foobar');
                 } 
                 //console.log(data);
             });
